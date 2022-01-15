@@ -1,24 +1,62 @@
-import React from "react";
+import React, { useState } from "react";
 import { useGetCryptosNewsQuery } from "../services/cryptoNewsApi";
+import { useGetCryptosQuery } from "../services/cryptoApi";
 import { Select, Row, Typography, Col, Avatar, Card } from "antd";
 import moment from "moment";
 
 const { Text, Title } = Typography;
-const { Options } = Select;
+const { Option } = Select;
 
 const demoImage =
   "https://coinrevolution.com/wp-content/uploads/2020/06/cryptonews.jpg";
 function News({ simplified }) {
+  const [newsCategory, setNewsCategory] = useState("Cryptocurrency");
+  const { data } = useGetCryptosQuery(100);
+
+  //wihtout shearch
+  const { data: cryptoNews } = useGetCryptosNewsQuery({
+    newsCategory: newsCategory,
+    count: simplified ? 8 : 30,
+  });
+
+  //with search functionality implimentation
+
+  /*
+
   const { data: cryptoNews } = useGetCryptosNewsQuery({
     newsCategory: "cryptocurrency",
     count: simplified ? 8 : 30,
   });
+
+
+   */
 
   console.log("news", cryptoNews?.value);
   if (!cryptoNews?.value) return "Loading...";
   return (
     <>
       <Row gutter={[24, 24]}>
+        {!simplified && (
+          <Col span={24}>
+            <Select
+              showSearch
+              className="slect-news"
+              placeholder="Select a Crypto"
+              optionFilterProp="children"
+              onChange={(value) => setNewsCategory(value)}
+              filterOption={(input, option) =>
+                option.children
+                  .toLowerCase()
+                  .indexOf(input.toLocaleLowerCase()) >= 0
+              }
+            >
+              <Option value="Cryptocurrency">Cryptocurrency</Option>
+              {data?.data?.coins.map((coin) => (
+                <Option value={coin.name}>{coin.name}</Option>
+              ))}
+            </Select>
+          </Col>
+        )}
         {cryptoNews?.value.map((news, i) => (
           <Col xs={24} sm={12} lg={8} key={i}>
             <Card hoverable className="news-card">
