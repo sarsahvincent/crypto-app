@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import millify from "millify";
 import { Link, useLocation } from "react-router-dom";
 import { Card, Row, Col, Input } from "antd";
-
 import { useGetCryptosQuery } from "../services/cryptoApi";
 
 function Cryptocurrencies({ simplified }) {
@@ -11,6 +10,7 @@ function Cryptocurrencies({ simplified }) {
   const [cryptos, setCryptos] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const location = useLocation();
+// user?.firstName.toLowerCase().includes(searchTerm.toLowerCase() || user?.lastName.toLowerCase().includes(searchTerm.toLowerCase())
 
   useEffect(() => {
     const filteredData = cryptosList?.data?.coins.filter((coin) =>
