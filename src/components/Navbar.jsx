@@ -17,7 +17,7 @@ function Navbar() {
       <div className="logo-container">
         <Avatar src={icon} size="large" />
         <Typography.Title level={2} className="logo">
-          <Link to="/">VAS Crypto</Link>
+          <Link to="/">Algo Crypto</Link>
         </Typography.Title>
       </div>
       <Menu theme="dark">

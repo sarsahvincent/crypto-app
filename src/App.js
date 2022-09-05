@@ -36,7 +36,7 @@ function App() {
 
         <div className="footer" level={5}>
           <Typography.Title style={{ color: "white", textAlign: "center", fontSize:'18px' }}>
-            VAS Crypto <br /> All rights reserved
+            Algo Crypto <br /> All rights reserved
           </Typography.Title>
           <Typography.Title>
             <Space style={{fontSize:'18px'}}>
